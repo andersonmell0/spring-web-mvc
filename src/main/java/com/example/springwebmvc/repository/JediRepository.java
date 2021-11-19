@@ -12,8 +12,10 @@ import com.example.springwebmvc.model.Jedi;
 public interface JediRepository extends JpaRepository<Jedi, Long>{
 
 	public List<Jedi> jedi = new ArrayList<>();
+	
+	List<Jedi> findByNameContainingIgnoreCase(final String name);
 			
-	public JediRepository() {		
+	/*public JediRepository() {		
 		jedi.add(new Jedi("Luke", "Skywalker"));
 		jedi.add(new Jedi("Anakin", "Skywalker"));		
 	}
@@ -24,5 +26,5 @@ public interface JediRepository extends JpaRepository<Jedi, Long>{
 
 	public void add(final Jedi jedi) {
 		this.jedi.add(jedi);	
-	}
+	}*/
 }
