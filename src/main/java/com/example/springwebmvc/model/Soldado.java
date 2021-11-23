@@ -1,10 +1,25 @@
 package com.example.springwebmvc.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="soldado")
 public class Soldado {
 	
+	@Id
+    @Column(name = "soldado_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
 	private String nome;
+	
 	private String raca;
+	
 	private String arma;
 		
 	public Long getId() {

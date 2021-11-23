@@ -1,7 +1,11 @@
-package com.example.springwebmvc.controller;
+package com.example.springwebmvc.rest;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,25 +18,39 @@ import com.example.springwebmvc.model.Soldado;
 import com.example.springwebmvc.service.SoldadoService;
 
 @RestController
-@RequestMapping("/v1/soldado")
-public class SoldadoController {
+@RequestMapping("/api/soldado")
+public class SoldadoResource {
 	
+	@Autowired
 	private SoldadoService service;
+	
+	@GetMapping
+    public ResponseEntity<List<Soldado>> listarSoldado() {
+        List<Soldado> soldados = service.listarSoldados();
+        return ResponseEntity.status(HttpStatus.OK).body(soldados);
+    }
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Soldado> buscarSoldado(@PathVariable("id") Long id) {
-		Soldado soldado = service.buscarSoldado(id);
+		Soldado soldado = service.buscarSoldadoPorId(id);
 		return ResponseEntity.status(HttpStatus.OK).body(soldado);
 	}
 	
 	@PostMapping
-	public ResponseEntity criarSoldado(@RequestBody Soldado soldado) {
+	public ResponseEntity<Soldado> criarSoldado(@RequestBody Soldado soldado) {
 		service.criarSoldado(soldado);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity editarSoldado(@PathVariable("id") Long id, @RequestBody Soldado soldado) {
-		return null;	
+	public ResponseEntity<Soldado> editarSoldado(@PathVariable("id") Long id, @RequestBody Soldado dto) {
+		service.alterarSoldado(id, dto);
+        return ResponseEntity.ok().build();	
 	}
+	
+	@DeleteMapping("/{id}")
+    public ResponseEntity<Soldado> deletarSoldado(@PathVariable Long id) {
+        service.deletarSoldado(id);
+        return ResponseEntity.ok().build();
+    }	
 }
