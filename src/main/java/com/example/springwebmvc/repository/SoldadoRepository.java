@@ -11,7 +11,7 @@ import com.example.springwebmvc.model.Soldado;
 @Repository
 public interface SoldadoRepository extends JpaRepository<Soldado, Long>{
 
-	public List<Soldado> soldado = new ArrayList<>();
+	public List<Soldado> soldados = new ArrayList<>();
 	
 	List<Soldado> findByNomeContainingIgnoreCase(final String nome);
 			

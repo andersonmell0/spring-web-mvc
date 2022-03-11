@@ -21,6 +21,8 @@ public class Soldado {
 	private String raca;
 	
 	private String arma;
+	
+	private String status;
 		
 	public Long getId() {
 		return id;
@@ -46,5 +48,11 @@ public class Soldado {
 	public void setArma(String arma) {
 		this.arma = arma;
 	}
-	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+		
 }
